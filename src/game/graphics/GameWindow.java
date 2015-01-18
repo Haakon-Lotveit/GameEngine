@@ -2,7 +2,9 @@ package game.graphics;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import game.entity.examples.DumbRenderer;
+import game.entity.examples.FlatStaticLevel;
 import game.entity.examples.StaticImage;
+import game.entity.examples.StaticSquareTile;
 import game.entity.types.abstracts.Renderable;
 import game.resource.loader.SquareSpriteLoader;
 
@@ -94,5 +96,14 @@ public class GameWindow {
 		
 		gw.gc.removeAllRenderingTargets();
 		
+		StaticSquareTile[][] tiles = new StaticSquareTile[4][4];
+		for(int x = 0; x < 4; ++x) {
+			for(int y = 0; y < 4; ++y) {
+				tiles[x][y] = new StaticSquareTile(loader.getImage(x, y % 2), x, y, 64);
+			}
+		}
+		
+		FlatStaticLevel level = new FlatStaticLevel(tiles);
+		gw.gc.addRenderingTarget(level);
 	}
 }
