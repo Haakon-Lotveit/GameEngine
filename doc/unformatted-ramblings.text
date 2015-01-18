@@ -1,0 +1,44 @@
+This file is filled with stuff that should be re-written into a more easy-to understand format later.
+
+For now, this is mostly notes for my own benefit for writing proper documentation later.
+
+How does the rendering work?
+First off, let's point out an important thing:
+The engine is horribly unoptimized at the current point in time, so any documentation about perf is premature.
+
+The basic idea is to have an ordered set of render-hierarchies (better name for this is needed. This name sounds too complicated for the simple concept).
+
+So you could make a 1000×1000 window, and make two render-hierarchies for it.
+One could be say, the main screen, and the other a GUI to help you do things. (Think Command&Conquer Tiberian Dawn for an example.)
+Then you'd just have to tell the GUI to start drawing 800 pixels to the right for instance, and you'd have an 800×1000 window for explosions, and an 200×1000 window for the gui.
+
+This way, the graphics for the GUI can be worked on independently of the graphics for the main game. They don't know about each other (except that they need to know where they can't draw in the form of offsets), so we isolate some complexity, making a cleaner design. (Note that this is my first proper engine, so I may be full of shit.)
+
+This means that you have to do a lot of bullshit just to draw a simple image on the screen. In order:
+
+  1: Ask for a screen with a specified size.
+  2: Start the graphics engine. (although this can be done at any later point instead, I guess.)
+  3: Get a BufferedImage of the image you want drawn (there are loaders to simplify this available).
+  4: Put it in a StaticImage, which is a "primitive" of sorts in the hierarchy, in the sense that it only draws itself.
+  5: Put that StaticImage in a Renderable. (DumbRenderable for instance)
+  6: Set any offsets you want set. (Can be done later, but then the image will jump)
+  7: tell the game canvas to add the rendering target.
+
+The idea is to simplify this process somewhat, so that you can say, make levels consisting of several layers of tiles (terrain, roads, cities, overhead skyes, etc.) and load it as a file, and have Something Else® take care of it for you. I guess I have been poisoned by Java's love for tooling.
+
+My goal is to have simple file formats that can be loaded with simple calls. That may make the methods to actually load and parse these files more complex, but that's a compromise I'm willing to make.
+
+A level could for instance be a folder structure as so:
+res/levels/campaign/levelname/
+ |
+ +--> Level description file
+ +--> layers/
+       |
+       +--> layer-files
+
+Where the description file would describe things like what tile-resources it would need, their aliases, what layers that needed to be loaded and what they are called.
+
+This would be overkill for a simple level with no stuff in it.
+Another possibility would be to make a level-editor that could create this stuff automatically. That shouldn't be too hard, actually. Would take time, but wouldn't be too hard.
+
+
