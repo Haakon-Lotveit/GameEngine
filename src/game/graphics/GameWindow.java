@@ -91,5 +91,6 @@ public class GameWindow {
 		
 		System.out.println(container);
 		System.out.println(si);
+		gw.gc;
 	}
 }

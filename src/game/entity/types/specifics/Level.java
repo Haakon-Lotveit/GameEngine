@@ -2,6 +2,7 @@ package game.entity.types.specifics;
 
 import game.entity.types.abstracts.Creature;
 import game.entity.types.abstracts.Paintable;
+import game.entity.types.abstracts.Renderable;
 import game.entity.types.abstracts.Tickable;
 
 /**
@@ -15,7 +16,7 @@ import game.entity.types.abstracts.Tickable;
  * @author Haakon Løtveit (haakon.lotveit@student.uib.no)
  *
  */
-public interface Level {
+public interface Level extends Renderable {
 	/**
 	 * Can you legally go in a given tile
 	 * If the tile is out of bounds, the answer is no.

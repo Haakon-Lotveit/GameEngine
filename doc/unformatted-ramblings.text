@@ -41,4 +41,7 @@ Where the description file would describe things like what tile-resources it wou
 This would be overkill for a simple level with no stuff in it.
 Another possibility would be to make a level-editor that could create this stuff automatically. That shouldn't be too hard, actually. Would take time, but wouldn't be too hard.
 
+About examples:
+EVERYTHING in examples is dumb as bricks. On purpose. It is meant to be examples of how to get started using this stuff, not the best, most fancy ways of doing things in it.
 
+Stuff like abstract classes etc. doesn't really belong.

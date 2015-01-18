@@ -1,5 +1,8 @@
 package game.entity.types.specifics;
 
-public interface Tile {
+import game.entity.types.abstracts.Geographic;
+import game.entity.types.abstracts.Paintable;
+
+public interface Tile extends Paintable, Geographic{
 
 }

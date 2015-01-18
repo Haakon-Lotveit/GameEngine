@@ -18,8 +18,9 @@ public class GameCanvas {
 	
 	private void init() {
 		canvas = new Canvas();
-		targets = new ArrayList<>(8);
 		thread = null;
+		
+		removeAllRenderingTargets();
 	}
 	
 	public void start(){
@@ -104,6 +105,15 @@ public class GameCanvas {
 		if(null == target) {			
 			throw new NullPointerException();
 		}
-		targets.add(target);
+		
+		synchronized (targets) {
+			targets.add(target);	
+		}
+		
+	}
+	
+	/* blanks out all rendering targets */
+	public void removeAllRenderingTargets() {
+		targets = new ArrayList<Renderable>(8);
 	}
 }
