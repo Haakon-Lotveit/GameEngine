@@ -65,7 +65,7 @@ public class GameWindow {
 			graffix[i] = loader.getImage(i, 0);
 		}
 		
-		AnimatedTile at = new AnimatedTile(0, 0, 15, graffix, 64);
+		AnimatedTile at = new AnimatedTile(0, 0, 15, graffix, 64, false);
 		Renderable atHolder = new DumbRenderer();
 		atHolder.setGraphicals(at);
 		atHolder.setOffset(20, 20);
