@@ -7,5 +7,5 @@ package game.geography;
  *
  */
 public enum PersonalDirection {
-  UP, DOWN, LEFT, RIGHT;
+  FORWARD, BACK, LEFT, RIGHT;
 }

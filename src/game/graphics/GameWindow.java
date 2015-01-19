@@ -1,6 +1,7 @@
 package game.graphics;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import game.entity.examples.AnimatedTile;
 import game.entity.examples.DumbRenderer;
 import game.entity.examples.FlatStaticLevel;
 import game.entity.examples.StaticImage;
@@ -9,6 +10,7 @@ import game.entity.types.abstracts.Renderable;
 import game.resource.loader.SquareSpriteLoader;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -58,52 +60,15 @@ public class GameWindow {
 		/* Get us a spriteloader to load it for us. */
 		SquareSpriteLoader loader = new SquareSpriteLoader(image, 64);
 		
-		/* get us a thing to render */
-		StaticImage si = new StaticImage(loader.getImage(0, 0));
-		
-		/* We need to put it in a container for the canvas to accept it. */
-		Renderable container = new DumbRenderer();
-		container.setGraphicals(si);
-		
-		gw.gc.addRenderingTarget(container);
-		 
-		try {
-			Thread.sleep(1500);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
+		BufferedImage[] graffix = new BufferedImage[4];
+		for(int i = 0; i < graffix.length; ++i) {
+			graffix[i] = loader.getImage(i, 0);
 		}
 		
-		container.setOffset(50,50);
-		
-		try {
-			Thread.sleep(1500);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-		
-		si.setPosition(400, 80);
-		
-		try {
-			Thread.sleep(1500);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-		
-		si.setPosition(0, 0);
-		
-		System.out.println(container);
-		System.out.println(si);
-		
-		gw.gc.removeAllRenderingTargets();
-		
-		StaticSquareTile[][] tiles = new StaticSquareTile[4][4];
-		for(int x = 0; x < 4; ++x) {
-			for(int y = 0; y < 4; ++y) {
-				tiles[x][y] = new StaticSquareTile(loader.getImage(x, y % 2), x, y, 64);
-			}
-		}
-		
-		FlatStaticLevel level = new FlatStaticLevel(tiles);
-		gw.gc.addRenderingTarget(level);
+		AnimatedTile at = new AnimatedTile(0, 0, 15, graffix, 64);
+		Renderable atHolder = new DumbRenderer();
+		atHolder.setGraphicals(at);
+		atHolder.setOffset(20, 20);
+		gw.gc.addRenderingTarget(atHolder);
 	}
 }
