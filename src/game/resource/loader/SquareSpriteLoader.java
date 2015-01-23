@@ -88,4 +88,9 @@ public class SquareSpriteLoader {
 	public BufferedImage getSheet(){
 		return SHEET;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("<SquareSpriteLoader@%d, with (%d×%d) tiles at (%d×%d) pixels>", hashCode(), numColumns(), numRows(), TILESIZE, TILESIZE); 
+	}
 }
